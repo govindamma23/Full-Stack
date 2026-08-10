@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Information Portal</title>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1 align="center">ABC College Information Portal</h1>
+        <hr>
+    </header>
+
+    <!-- Navigation -->
+    <nav align="center">
+        <a href="#about">About</a> |
+        <a href="#courses">Courses</a> |
+        <a href="#students">Students</a> |
+        <a href="#register">Registration</a> |
+        <a href="#media">Media</a>
+    </nav>
+
+    <hr>
+
+    <!-- About College -->
+    <section id="about">
+        <h2>About Our College</h2>
+
+        <p>
+            <b>ABC College of Engineering</b> is one of the best engineering colleges.
+            It provides <i>quality education</i> with
+            <u>excellent infrastructure</u> and experienced faculty members.
+        </p>
+
+        <p>
+            Example of Subscript: H<sub>2</sub>O <br>
+            Example of Superscript: x<sup>2</sup>
+        </p>
+    </section>
+
+    <hr>
+
+    <!-- Ordered List -->
+    <section id="courses">
+        <h2>Courses Offered</h2>
+
+        <ol>
+            <li>Computer Science Engineering</li>
+            <li>Electronics and Communication Engineering</li>
+            <li>Electrical Engineering</li>
+            <li>Civil Engineering</li>
+            <li>Mechanical Engineering</li>
+        </ol>
+
+        <h2>College Facilities</h2>
+
+        <ul>
+            <li>Library</li>
+            <li>Computer Labs</li>
+            <li>Sports Complex</li>
+            <li>Hostel</li>
+            <li>Cafeteria</li>
+        </ul>
+
+        <h2>Useful Links</h2>
+
+        <a href="https://www.google.com" target="_blank">Google</a><br>
+        <a href="https://www.andhrauniversity.edu.in" target="_blank">
+            College Website
+        </a>
+
+    </section>
+
+    <hr>
+
+    <!-- Table -->
+    <section id="students">
+
+        <h2>Student Information</h2>
+
+        <table border="1" cellpadding="8">
+
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Branch</th>
+                <th>Email</th>
+            </tr>
+
+            <tr>
+                <td>101</td>
+                <td>Anusha</td>
+                <td>CSE</td>
+                <td>anusha@gmail.com</td>
+            </tr>
+
+            <tr>
+                <td>102</td>
+                <td>Rahul</td>
+                <td>ECE</td>
+                <td>rahul@gmail.com</td>
+            </tr>
+
+            <tr>
+                <td>103</td>
+                <td>Priya</td>
+                <td>EEE</td>
+                <td>priya@gmail.com</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+    <hr>
+
+    <!-- Images -->
+
+    <section>
+
+        <h2>College Logo</h2>
+
+        <img src="logo.png"
+             alt="College Logo"
+             width="150">
+
+        <h2>College Building</h2>
+
+        <img src="college.jpg"
+             alt="College Building"
+             width="350">
+
+    </section>
+
+    <hr>
+
+    <!-- Form -->
+
+    <section id="register">
+
+        <h2>Student Registration Form</h2>
+
+        <form>
+
+            <label>Name:</label><br>
+            <input type="text" placeholder="Enter Name">
+            <br><br>
+
+            <label>Email:</label><br>
+            <input type="email" placeholder="Enter Email">
+            <br><br>
+
+            <label>Password:</label><br>
+            <input type="password">
+            <br><br>
+
+            <label>Phone Number:</label><br>
+            <input type="tel">
+            <br><br>
+
+            <label>Date of Birth:</label><br>
+            <input type="date">
+            <br><br>
+
+            <label>Gender:</label><br>
+
+            <input type="radio" name="gender">Male
+
+            <input type="radio" name="gender">Female
+
+            <br><br>
+
+            <label>Hobbies:</label><br>
+
+            <input type="checkbox">Reading
+
+            <input type="checkbox">Sports
+
+            <input type="checkbox">Music
+
+            <br><br>
+
+            <label>Branch:</label><br>
+
+            <select>
+
+                <option>Select</option>
+                <option>CSE</option>
+                <option>ECE</option>
+                <option>EEE</option>
+                <option>Civil</option>
+                <option>Mechanical</option>
+
+            </select>
+
+            <br><br>
+
+            <label>Favorite Color:</label><br>
+            <input type="color">
+
+            <br><br>
+
+            <label>Age:</label><br>
+            <input type="number">
+
+            <br><br>
+
+            <label>Programming Skill:</label><br>
+            <input type="range">
+
+            <br><br>
+
+            <label>Address:</label><br>
+
+            <textarea rows="5" cols="40"></textarea>
+
+            <br><br>
+
+            <input type="submit" value="Submit">
+
+            <input type="reset" value="Reset">
+
+        </form>
+
+    </section>
+
+    <hr>
+
+    <!-- HTML5 Audio Video -->
+
+    <section id="media">
+
+        <article>
+
+            <h2>College Anthem (Audio)</h2>
+
+            <audio controls>
+
+                <source src="college.mp3" type="audio/mpeg">
+
+                Your browser does not support audio.
+
+            </audio>
+
+        </article>
+
+        <br>
+
+        <article>
+
+            <h2>College Introduction Video</h2>
+
+            <video width="500" controls>
+
+                <source src="college.mp4" type="video/mp4">
+
+                Your browser does not support video.
+
+            </video>
+
+        </article>
+
+    </section>
+
+    <hr>
+
+    <!-- Footer -->
+
+    <footer align="center">
+
+        <p>
+            © 2026 ABC College Information Portal |
+            Designed using HTML5
+        </p>
+
+    </footer>
+
+</body>
+</html>
