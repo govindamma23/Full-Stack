@@ -1,2 +1,0 @@
-Hello Node.js
-Welcome to file handling.
