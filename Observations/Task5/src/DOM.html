@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DOM Demo - Dynamic Content, Style, and Attributes</title>
+<style>
+    body { font-family: Arial, sans-serif; background: #f4f6f8; padding: 40px; }
+    .card { max-width: 500px; margin: 0 auto; background: #fff; padding: 25px 30px;
+            border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    #target {
+        padding: 15px; border: 2px solid #ccc; border-radius: 6px; margin: 15px 0;
+        transition: all 0.3s ease;
+    }
+    button {
+        padding: 8px 14px; margin: 4px 4px 4px 0; border: none; border-radius: 5px;
+        background: #2c7be5; color: white; cursor: pointer; font-size: 14px;
+    }
+    button:hover { background: #1a5bb8; }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>DOM Manipulation Demo</h2>
+
+    <!-- This <p> element is what we will manipulate -->
+    <p id="target" title="original tooltip">I am a paragraph element. Click the buttons below to change my content, style, and attributes.</p>
+
+    <button onclick="changeContent()">Change Content</button>
+    <button onclick="changeStyle()">Change Style</button>
+    <button onclick="changeAttribute()">Change Attribute</button>
+    <button onclick="resetAll()">Reset</button>
+</div>
+
+<script>
+    const target = document.getElementById('target');
+
+    // 1. Change CONTENT
+    function changeContent() {
+        target.textContent = "My content has been changed dynamically using JavaScript!";
+    }
+
+    // 2. Change STYLE
+    function changeStyle() {
+        target.style.backgroundColor = "#dff0d8";
+        target.style.color = "#3c763d";
+        target.style.fontWeight = "bold";
+        target.style.border = "2px solid #3c763d";
+    }
+
+    // 3. Change ATTRIBUTE
+    function changeAttribute() {
+        target.setAttribute('title', 'updated tooltip - try hovering!');
+        target.setAttribute('id', 'target'); // id stays same, but shows attribute access
+        target.setAttribute('data-modified', 'true');
+    }
+
+    // Reset everything back to original
+    function resetAll() {
+        target.textContent = "I am a paragraph element. Click the buttons below to change my content, style, and attributes.";
+        target.removeAttribute('style');
+        target.setAttribute('title', 'original tooltip');
+        target.removeAttribute('data-modified');
+    }
+</script>
+
+</body>
+</html>

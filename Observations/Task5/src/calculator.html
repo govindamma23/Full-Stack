@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Product Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        display: flex;
+        justify-content: center;
+        padding-top: 60px;
+    }
+    .card {
+        background: #ffffff;
+        padding: 30px 35px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        width: 340px;
+    }
+    h2 {
+        margin-top: 0;
+        color: #2c3e50;
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-top: 14px;
+        font-weight: bold;
+        color: #333;
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 15px;
+    }
+    #result {
+        margin-top: 22px;
+        padding: 15px;
+        background: #eafbea;
+        border: 1px solid #b7e4b7;
+        border-radius: 6px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #256029;
+        text-align: center;
+    }
+    .error {
+        color: #b00020;
+        font-size: 13px;
+        margin-top: 4px;
+        min-height: 16px;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Product Calculator</h2>
+
+    <label for="productName">Product Name</label>
+    <input type="text" id="productName" placeholder="e.g. Notebook" value="Notebook">
+
+    <label for="quantity">Quantity</label>
+    <input type="number" id="quantity" placeholder="e.g. 3" value="3" min="0">
+    <div class="error" id="quantityError"></div>
+
+    <label for="price">Price per unit (₹)</label>
+    <input type="number" id="price" placeholder="e.g. 50" value="50" min="0">
+    <div class="error" id="priceError"></div>
+
+    <div id="result">Total: ₹0.00</div>
+</div>
+
+<script>
+    // Grab references to the DOM elements we need
+    const productNameInput = document.getElementById('productName');
+    const quantityInput   = document.getElementById('quantity');
+    const priceInput      = document.getElementById('price');
+    const resultDiv       = document.getElementById('result');
+    const quantityError   = document.getElementById('quantityError');
+    const priceError      = document.getElementById('priceError');
+
+    /**
+     * calculateTotal()
+     * Reads the current quantity and price, validates them,
+     * and updates the result div dynamically (no page reload).
+     */
+    function calculateTotal() {
+        const quantity = parseFloat(quantityInput.value);
+        const price = parseFloat(priceInput.value);
+
+        // Reset previous error messages
+        quantityError.textContent = "";
+        priceError.textContent = "";
+
+        let hasError = false;
+
+        // Validation
+        if (isNaN(quantity) || quantity < 0) {
+            quantityError.textContent = "Enter a valid quantity (0 or more).";
+            hasError = true;
+        }
+        if (isNaN(price) || price < 0) {
+            priceError.textContent = "Enter a valid price (0 or more).";
+            hasError = true;
+        }
+
+        if (hasError) {
+            resultDiv.textContent = "Total: ₹0.00";
+            return;
+        }
+
+        const total = quantity * price;
+        const name = productNameInput.value.trim() || "Product";
+
+        // Update the DOM with the calculated total
+        resultDiv.textContent = `${name} Total: ₹${total.toFixed(2)}`;
+    }
+
+    // Event listeners: recalculate whenever quantity or price changes
+    quantityInput.addEventListener('input', calculateTotal);
+    priceInput.addEventListener('input', calculateTotal);
+    productNameInput.addEventListener('input', calculateTotal);
+
+    // Run once on page load so the initial values are reflected
+    calculateTotal();
+</script>
+</body>
+</html>

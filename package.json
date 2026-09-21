@@ -1,0 +1,24 @@
+{
+  "name": "fs-lab",
+  "version": "1.0.0",
+  "description": "* **Student Name:P.Govindamma\r * **Roll Number:A24126552104\r * **Department:** Computer Science & Engineering (AI & ML)\r * **Academic Year:** 2026–2027",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/govindamma23/Full-Stack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/govindamma23/Full-Stack/issues"
+  },
+  "homepage": "https://github.com/govindamma23/Full-Stack#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
