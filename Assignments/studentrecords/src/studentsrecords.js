@@ -33,11 +33,11 @@ db.students.find({ marks: { $gt: 75 } });
 db.students.find({ rollNo: "23CM004" });
 
 db.students.findOne({ rollNo: "23CM004" });
-)
+
 db.students.find({ year: 3 });                                  
 db.students.find({ marks: { $gte: 60, $lte: 80 } });            
 db.students.find({ year: 3, marks: { $gt: 80 } });              
-db.students.find({ $or: [{ branch: "IT" }, { marks: { $lt: 50 } }] }); // OR
+db.students.find({ $or: [{ branch: "IT" }, { marks: { $lt: 50 } }] }); 
  
 
 db.students.updateOne({ rollNo: "23CM005" }, { $set: { marks: 55 } });
@@ -49,7 +49,7 @@ db.students.find({ rollNo: { $in: ["23CM003", "23CM005", "23CM007"] } });
  
 
 db.students.deleteOne({ rollNo: "23CM009" });
-db.students.find({ rollNo: "23CM009" });   // returns nothing
+db.students.find({ rollNo: "23CM009" });   
  
 
 db.students.find().sort({ marks: -1 });
