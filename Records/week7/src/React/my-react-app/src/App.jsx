@@ -3,27 +3,20 @@ import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
-import Student from './component';
+
+import FunctionalComponent from './Functionalcomponent';
+import ClassComponent from './Classcomponent';
+
 function App() {
+  return (
+    <div>
+      <h1>React Components Demo</h1>
 
-    
-    const studentName = "Ravi";
-    const studentAge = 20;
+      <FunctionalComponent />
 
-
-    return (
-        <Student
-            name={studentName}
-            age={studentAge}
-        />
-    );
-
-
-
-
-  
+      <ClassComponent />
+    </div>
+  );
 }
 
-
-
-export default App
+export default App;

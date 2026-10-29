@@ -1,10 +1,12 @@
-function Student(props) {
-    return (
-        <div>
-            <h2>Student Details</h2>
-            <p>Name: {props.name}</p>
-            <p>Age: {props.age}</p>
-            <p>Branch: {props.branch}</p>
-        </div>
-    );
+
+function FunctionalComponent() {
+  return (
+    <div>
+      <h2>Functional Component</h2>
+      <p>Hello! This is a functional component.</p>
+    </div>
+  );
 }
+
+export default FunctionalComponent;
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Tracker</title>
+</head>
+<body>
+  <h1>Task Tracker</h1>
+
+  <input id="title" placeholder="New task">
+  <button onclick="addTask()">Add</button>
+
+  <ul id="list"></ul>
+
+  <script>
+    async function loadTasks() {
+      const res = await fetch("/tasks");
+      const tasks = await res.json();
+
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+
+      tasks.forEach(function (t) {
+        const li = document.createElement("li");
+        li.innerHTML =
+          '<input type="checkbox" ' + (t.completed ? "checked" : "") +
+          ' onchange="toggleTask(' + t.id + ')"> ' +
+          t.title +
+          ' <button onclick="deleteTask(' + t.id + ')">Delete</button>';
+        list.appendChild(li);
+      });
+    }
+
+    async function addTask() {
+      const input = document.getElementById("title");
+      await fetch("/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: input.value })
+      });
+      input.value = "";
+      loadTasks();
+    }
+
+    async function toggleTask(id) {
+      await fetch("/tasks/" + id, { method: "PUT" });
+      loadTasks();
+    }
+
+    async function deleteTask(id) {
+      await fetch("/tasks/" + id, { method: "DELETE" });
+      loadTasks();
+    }
+
+    loadTasks();
+  </script>
+</body>
+</html>
+

@@ -1,69 +1,80 @@
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
 
+
+const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
-const DATA_FILE = path.join(__dirname, "tasks.json");
 
-// ---- tiny JSON-file "database" ----
-function load() {
-  try {
-    return JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
-  } catch {
-    return [];
-  }
-}
-function save(tasks) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(tasks, null, 2));
-}
-
-// ---- middleware ----
 app.use(express.json());
-app.use((req, _res, next) => {
-  console.log(`${new Date().toISOString()} ${req.method} ${req.url}`);
-  next();
-});
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static('public'));
 
-// ---- REST API ----
-app.get("/api/tasks", (_req, res) => res.json(load()));
+let tasks = [
+    { id: 1, title: 'Complete assignment', completed: false },
+    { id: 2, title: 'Study Node.js', completed: false }
+];
 
-app.post("/api/tasks", (req, res) => {
-  const title = (req.body.title || "").trim();
-  if (!title) return res.status(400).json({ error: "Title is required." });
-
-  const tasks = load();
-  const task = { id: Date.now(), title, done: false, createdAt: new Date().toISOString() };
-  tasks.push(task);
-  save(tasks);
-  res.status(201).json(task);
+// Home route
+app.get('/', (req, res) => {
+    res.sendFile('index.html', { root: 'public' });
 });
 
-app.patch("/api/tasks/:id", (req, res) => {
-  const tasks = load();
-  const task = tasks.find((t) => t.id === Number(req.params.id));
-  if (!task) return res.status(404).json({ error: "Task not found." });
-
-  if (typeof req.body.done === "boolean") task.done = req.body.done;
-  if (typeof req.body.title === "string" && req.body.title.trim()) task.title = req.body.title.trim();
-  save(tasks);
-  res.json(task);
+// Get all tasks
+app.get('/tasks', (req, res) => {
+    res.json(tasks);
 });
 
-app.delete("/api/tasks/:id", (req, res) => {
-  const tasks = load();
-  const next = tasks.filter((t) => t.id !== Number(req.params.id));
-  if (next.length === tasks.length) return res.status(404).json({ error: "Task not found." });
-  save(next);
-  res.status(204).end();
+// Add a task
+app.post('/tasks', (req, res) => {
+    const { title } = req.body;
+
+    if (!title || !title.trim()) {
+        return res.status(400).json({
+            message: 'Task title is required'
+        });
+    }
+
+    const task = {
+        id: tasks.length
+            ? Math.max(...tasks.map(t => t.id)) + 1
+            : 1,
+        title: title.trim(),
+        completed: false
+    };
+
+    tasks.push(task);
+    res.status(201).json(task);
 });
 
-// ---- error handling ----
-app.use("/api", (_req, res) => res.status(404).json({ error: "Not found." }));
-app.use((err, _req, res, _next) => {
-  console.error(err);
-  res.status(500).json({ error: "Something went wrong on the server." });
+// Mark task as completed or incomplete
+app.put('/tasks/:id', (req, res) => {
+    const task = tasks.find(
+        t => t.id === Number(req.params.id)
+    );
+
+    if (!task) {
+        return res.status(404).json({
+            message: 'Task not found'
+        });
+    }
+
+    task.completed = !task.completed;
+    res.json(task);
 });
 
-app.listen(PORT, () => console.log(`Task tracker running at http://localhost:${PORT}`));
+// Delete a task
+app.delete('/tasks/:id', (req, res) => {
+    const id = Number(req.params.id);
+    const exists = tasks.some(t => t.id === id);
+
+    if (!exists) {
+        return res.status(404).json({
+            message: 'Task not found'
+        });
+    }
+
+    tasks = tasks.filter(t => t.id !== id);
+    res.json({ message: 'Task deleted successfully' });
+});
+
+// Start server
+app.listen(3000, () => {
+    console.log('Task tracker running at http://localhost:3000');
+});
